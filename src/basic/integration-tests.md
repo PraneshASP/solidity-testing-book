@@ -2,6 +2,8 @@
 
 Unit testing is a vital step in ensuring each individual contract works as expected. However, protocols often involve several contracts working together. It's crucial to check that these contracts interact correctly, which is where integration testing becomes essential. **The goal of the integration test should be to ensure that our contracts work together as expected, without focusing on the behavior of external contracts.**
 
+![](../images/integration-tests.png)
+
 ## Points to note: 
 -  It is essential to simulate the actual deployment environment as closely as possible, which means using real contract deployments instead of mocks. This ensures the tests reflect real-world operation and interactions.
 -  Integration tests should concentrate on the interaction between contracts rather than repeating validations of internal logic covered by unit tests. This approach keeps tests focused and avoids redundancy.

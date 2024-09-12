@@ -1,6 +1,8 @@
 # Unit tests
 Unit testing is the simplest form of testing. As the name suggests, each unit test should just test one thing at a time. It involves testing the smallest parts of your code – often individual functions – to ensure they work as expected.
 
+![](../images/unit-tests.png)
+
 #### Key Characteristics:
 - **Isolation**: Should focus on a single functionality.
 - **Speed**: Should run quickly to facilitate rapid iterations.
