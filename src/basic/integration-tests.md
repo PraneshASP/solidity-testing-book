@@ -1,6 +1,6 @@
 # Integration tests
 
-Unit testing is a vital step in ensuring each individual contract works as expected. However, protocols often involve several contracts working together. It's crucial to check that these contracts interact correctly, which is where integration testing becomes essential. 
+Unit testing is a vital step in ensuring each individual contract works as expected. However, protocols often involve several contracts working together. It's crucial to check that these contracts interact correctly, which is where integration testing becomes essential. **The goal of the integration test should be to ensure that our contracts work together as expected, without focusing on the behavior of external contracts.**
 
 ## Points to note: 
 -  It is essential to simulate the actual deployment environment as closely as possible, which means using real contract deployments instead of mocks. This ensures the tests reflect real-world operation and interactions.
@@ -73,7 +73,11 @@ contract GovernanceIntegrationTest is Test {
 
 The above test validates that the reward rate in the vault contract has been successfully updated by the governance contract. You can also notice that we're not validating if the `rewardRates` mapping is updated with the reward rate as it should be a unit test. 
 
+> 💡 **Random Tip:** 
+> 
+> To test the functions with external call to other contracts, you can follow the [mocking](https://solidity-testing-guide.vercel.app/basic/unit-tests.html#mocking) technique discussed in the Unit test chapter.  
+
 ## Key takeaways:
 - Integration test should come after unit tests.
-- All contracts should be properly setup, avoiding mocks.
+- All contracts should be properly setup, avoiding mock contracts.
 - Should not repeat the validations performed in the unit tests. 
