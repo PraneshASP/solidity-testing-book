@@ -1,5 +1,4 @@
-# Fuzz tests
-If you're here, I assume that you're already familiar with the previous forms for testing: unit, integration and fork. With the # Fork tests
+# Fork tests
 
 Fork tests are very similar to Integration tests. Fork tests ensure that our contracts works together as expected but in a live environment without or less mocking. This helps us mimic the behavior of the smart contracts post deployment, helping us catch any unexpected behavior. 
 
