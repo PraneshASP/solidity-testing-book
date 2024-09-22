@@ -1,4 +1,5 @@
-# Fork tests
+# Fuzz tests
+If you're here, I assume that you're already familiar with the previous forms for testing: unit, integration and fork. With the # Fork tests
 
 Fork tests are very similar to Integration tests. Fork tests ensure that our contracts works together as expected but in a live environment without or less mocking. This helps us mimic the behavior of the smart contracts post deployment, helping us catch any unexpected behavior. 
 
@@ -124,6 +125,37 @@ You might be surprised to find that it fails! The error message indicates that t
 
 The issue is in our `LiquidityAdder` contract. We're transferring tokens to the contract itself, but we never approved the Uniswap router to spend these tokens on behalf of the contract. The mock test didn't catch this because we mocked all the calls, but the fork test revealed the bug. We can see how fork tests can be useful even if we have unit/integration tests in place. 
 
+### Some foundry tips for fork tests:
+- `createSelectFork()` cheatcode helps you to create and make the fork active.
+- `createFork()` just helps you to create forks. Both the cheatcodes return a `forkId`.
+- Use `selectFork(forkId)`  to switch between chains during your fork tests. Remember to use `vm.makePersistent()` cheatcode to persist deployment across the selected forks. 
+- To make the fork tests faster, pass the block number when creating the fork next to the URL param. 
+- Use tools like [mesc](https://github.com/paradigmxyz/mesc/tree/main/cli) to automatically fetch the RPC url in your tests.
+ For example:
+ ```solidity
+ 
+    function fetchRpcUrlFromMesc(string memory networkName) internal returns (string memory url) {
+        string[] memory inputs = new string[](3);
+        inputs[0] = "mesc";
+        inputs[1] = "url";
+        inputs[2] = networkName;
+
+        bytes memory res = vm.ffi(inputs);
+        url = string(res);
+    }
+
+    function setUp() public {
+        string memory network = "avax-c-chain";
+        uint256 cchainForkId = vm.createSelectFork(fetchRpcUrlFromMesc(network), 41022344);
+        network = "eth-mainnet";
+        uint256 mainnetForkId = vm.createSelectFork(fetchRpcUrlFromMesc(network), 19120056);
+        // Do something
+     }
+ ```
+
+> [!TIP]
+> You can find more foundry related tips and techniques in my blog post [here](https://flawsomedev.com/blog/foundry-tips-and-tricks).
+
 ## Do we even need integration tests?
 Now you might ask since mocking is dangerous and error-prone do we even need integration tests? The answer is it depends. The example we saw is quite basic. For complex protocol, single function might interact with multiple different contracts (both internal and external). In such cases, integration tests help us carefully curate tests to identify edge cases in different interactions. Also integration tests are fast. So yes, in most cases integration tests provides value.  
 
@@ -131,3 +163,5 @@ For some protocols, integration tests might not be the most effective approach, 
 
 Therefore, it's important to tailor the test suite to the specific needs of the protocol, by focusing on what makes sense for each scenario. It provides a much higher level of confidence before deploying your contracts to mainnet.
    
+## Recap:
+So far we've looked into unit tests, integration tests and fork tests. Each method is all useful in its own aspect. When implemented correctly most bugs can be found with these tests. By having these three types of tests are sufficient enough to make the test suite strong enough against attacks for very basic contracts that doesn't do any crazy stuff. 
