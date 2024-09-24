@@ -6,7 +6,6 @@ While the basic tests can check the obvious scenarios, they might miss unexpecte
 
 This is where fuzz tests come in handy. Fuzz testing involves bombarding your functions with a wide range of random, unexpected inputs to see how they react. It's like throwing everything but the kitchen sink at your code to ensure it can handle anything that comes its way.
 
-
 ## Types:
 There are 2 types of fuzzing. 
 - Stateful
@@ -15,6 +14,8 @@ There are 2 types of fuzzing.
 **Stateless** tests are the basic ones. They don't keep track of the state or the sequence of the calls, so they're fast. 
 
 **Stateful** fuzzing are also called **invariant tests** as they make sure the defined invariant holds despite calling multiple methods in random sequence several times. We'll look into Invariant tests in the next chapter. Currently we focus on Stateless fuzz tests. 
+
+![](../images/fuzz-tests.png)
 
 ## Example:
 
