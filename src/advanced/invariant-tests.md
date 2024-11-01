@@ -3,7 +3,10 @@
 
  We just saw what fuzz tests are and how it can be useful. We mentioned that fuzz tests are "stateless", which means that it can test function in isolation. Invariant tests, on the other hand, are "**stateful**". It aims to verify that the entire system behaves correctly under specified conditions and properties that are supposed to always hold true. It ensures that the state of the contract remains consistent and aligned with its expected properties, irrespective of the sequence of operations performed. **An invariant is something that must always be true about the system, no matter how it is used**. For example, the sum of all token balances in a liquidity pool might always need to equal the pool’s reserves.
 
-Invariant tests are not limited to testing isolated contract methods but rather observes how different functions interact with each other over time, ensuring that the core requirements of the protocol are respected under all circumstances. It’s particularly powerful in the context of DeFi protocols, where interactions between different methods, contracts, and economic incentives must consistently respect system-wide invariants.
+![](../images/invariant_animation.gif)
+
+Invariant tests are not limited to testing isolated contract methods but rather observes how different functions interact with each other over time, ensuring that the core requirements of the protocol are respected under all circumstances. It’s particularly powerful in the context of DeFi protocols, where interactions between different methods and contracts must consistently respect system-wide invariants.
+
 
 
 ## Fuzzing vs. Invariant Testing
