@@ -5,7 +5,7 @@
   - [Unit tests](./basic/unit-tests.md)
   - [Integration tests](./basic/integration-tests.md)
   - [Fork tests](./basic/fork-tests.md)
-  - [Fuzz Tests](./advanced/fuzz-tests.md)
+  - [Fuzz Tests](./basic/fuzz-tests.md)
 - [Advanced Testing](./advanced/Readme.md)
   - [Invariant Tests](./advanced/invariant-tests.md)
   - [Differential Tests](./advanced/differential-tests.md)

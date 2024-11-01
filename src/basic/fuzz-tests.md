@@ -154,7 +154,7 @@ function repay(address token, uint256 principal, uint256 rate, uint256 time) ext
 
 This simple check ensures that we only attempt to transfer fees when they are non-zero, thereby avoiding potential reverts with certain ERC20 implementations.
 
-### Tuning the fuzz tests (bounded tests):
+### Tuning the fuzz tests:
 You can notice the test uses multiple `vm.assume()` cheatcodes. It is a feature provided by foundry to constrain inputs to realistic ranges.
 - Prevents overflow: By limiting `amount` to 1e36 (1 billion ETH), we avoid overflow in most cases. 
 - Realistic scenarios: The bounds ensure we're testing with values that could occur in the real world. 
