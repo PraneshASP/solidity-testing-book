@@ -1,7 +1,9 @@
 # Unit tests
 Unit testing is the simplest form of testing. As the name suggests, each unit test should just test one thing at a time. It involves testing the smallest parts of your code – often individual functions – to ensure they work as expected.
 
-Key Characteristics:
+![](../images/unit-tests.png)
+
+#### Key Characteristics:
 - **Isolation**: Should focus on a single functionality.
 - **Speed**: Should run quickly to facilitate rapid iterations.
 - **Independence**: Must not rely on external systems or states.
@@ -133,3 +135,36 @@ For the getter method, the test would be straightforward.
 I'll leave it to the readers to examine how the latter test is quite stronger than the former. 
 
 All the code snippets in this guide are available on the [GitHub]() for your reference. 
+
+## Mocking:
+
+In some cases, you might need to mock certain calls to unit test the functions. For ex, consider a deposit() function in which some ERC20 tokens are transferred to a Vault contract. Instead of deploying a mock erc20 contract and trying to perform an actual `transferFrom()` call, you can use `vm.mockCall()` cheatcode (from Foundry) and make the `transferFrom()` call to return `true` so that you can go ahead and test the actual logic ignoring the nuances of setting up a token contract. This facilitates the testing of the contract's logic in isolation, bypassing the complexities associated with setting up and interacting with other contracts. 
+
+
+### `deposit()` method:
+
+```solidity
+function deposit(uint256 _amount) external {
+        require(token.transferFrom(msg.sender, address(this), _amount), "Transfer failed");
+        balances[msg.sender] += _amount;
+    }
+```
+
+### Unit test:
+
+```solidity
+// Vault.t.sol
+contract VaultTest is Test {
+...
+address tokenA = makeAddr("TokenA");
+...
+
+function test_deposit() external {
+    vm.mockCall(address(tokenA), abi.encodeWithSelector(IERC20.transferFrom.selector), abi.encode(true));
+    vault.deposit(10);
+    assert(vault.balances(address(this))== 10);
+  }
+}
+```
+
+This approach enables focused testing on the contract in question, allowing for a more efficient and targeted validation of its logic and behavior. For comprehensive testing that involves the entire transaction flow and interaction between multiple contracts, [integration tests](./integration-tests.md) should be implemented. 
