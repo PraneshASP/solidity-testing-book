@@ -484,6 +484,19 @@ Suite result: ok. 2 passed; 0 failed; 0 skipped; finished in 70.86s (86.28s CPU 
 
 The tests now pass with 0 reverts, confirming that the invariants hold and the bug has been fixed.
 
+> [!TIP]
+> You can set the `show_metrics` flag to `true` in your foundry config file to see the call metrics of your invariant tests. 
+> ```
+> [PASS] invariant_totalDepositsGreaterThanBorrows() (runs: 256, calls: 128000, reverts: 0)
+> | Contract | Selector | Calls | Reverts | Discards |
+> |----------|----------|-------|---------|----------|
+> | Handler  | borrow   | 25440 |    0    |     0    |
+> | Handler  | deposit  | 25753 |    0    |     0    |
+> | Handler  | repay    | 25653 |    0    |     0    |
+> | Handler  | withdraw | 25766 |    0    |     0    |
+> ```
+> You can see the no.of calls to each method in our Handler contract. 
+
 
 ### How the Invariant Test Helped Find the Bug
 

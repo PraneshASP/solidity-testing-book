@@ -4,3 +4,5 @@ language = "en"
 multilingual = false
 src = "src"
 title = "Smart Contract Testing: For dummies"
+
+[preprocessor.callouts]

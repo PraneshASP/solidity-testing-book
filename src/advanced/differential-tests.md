@@ -67,13 +67,15 @@ fn main() {
 
 ```
 
-To test this in Foundry, we can use the `vm.ffi()` cheatcode. It allows developers to call external programs or scripts from within Solidity tests. This feature is incredibly useful for **differential testing**, as it enables us to run arbitrary command to implement advanced and complex testing patterns like this one. 
+To test this in Foundry, we can use the `vm.ffi()` cheatcode. It allows us to call external programs or scripts from within Solidity tests. This feature is quite useful in this case, as it enables us to run arbitrary command to implement advanced and complex testing patterns like this one. 
 
 The `vm.ffi()` cheatcode accepts an array of strings where:
 
 1. The **first element** is the path to the external program or script you want to execute.
 2. The **subsequent elements** are the arguments to pass to the program or script.
 3. The output of the command is returned as a `bytes` object, which can be decoded into the desired type (e.g., `uint`, `string`). 
+
+You can find more details about the ffi cheatcode [here](https://book.getfoundry.sh/cheatcodes/ffi).
 
 Here’s an expanded example of a test file using FFI to compare the Fibonacci computation in Solidity and Rust:
 
@@ -220,9 +222,9 @@ It helps verify the correctness as well as gas efficiency of the libraries.
 
 ## Conclusion
 
-Differential testing is a powerful technique for enhancing the reliability and security of Solidity smart contracts. As it compares multiple implementations of the same functionality, developers can easily spot bugs that might have gone unnoticed by basic tests. When combined with fuzz testing, this approach becomes even more robust, automatically exploring a wide range of inputs and conditions.
+Differential testing is quite a useful technique for enhancing the reliability and security of the math heavy logic. As it compares multiple implementations of the same functionality, we can easily spot bugs that might have gone unnoticed by basic tests. When combined with fuzz testing, this approach becomes even more robust, automatically exploring a wide range of inputs and conditions.
 
-In the high-stakes environment of smart contracts, employing differential testing on top of other tests contributes significantly to building trustworthy and secure protocols. As our ecosystem continues to grow, integrating these testing practices will be crucial for solidity developers aiming to deliver robust and reliable smart contracts.
+In the high-stakes environment of smart contracts, employing differential testing on top of other tests contributes significantly to building trustworthy and secure protocols. As our ecosystem continues to grow, integrating these testing practices will be crucial for developers aiming to deliver robust and reliable smart contracts.
 
 ## References
 
