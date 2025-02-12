@@ -11,6 +11,7 @@
   - [Differential Tests](./advanced/differential-tests.md)
   - [Lifecycle Tests](./advanced/lifecycle-tests.md)
   - [Scenario Tests](./advanced/scenario-tests.md)
+    - [Building a scenario test runner](./advanced/scenario-test-runner.md)
   - [Mutation Tests](./advanced/mutation-tests.md)
 - [Formal verification](./formal-verification.md)
 - [Symbolic Testing](./symbolic-testing.md)
