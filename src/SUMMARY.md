@@ -15,6 +15,5 @@
   - [Mutation Tests](./advanced/mutation-tests.md)
 - [Formal verification](./formal-verification.md)
 - [Symbolic Testing](./symbolic-testing.md)
-- [Swiss Cheese Method](./swiss-cheese.md)
 - [Branching Tree Technique](./branching-tree-technique.md)
-- [Resources](./resources.md)
+- [Swiss Cheese Method](./swiss-cheese.md)
