@@ -4,7 +4,9 @@ export default defineConfig({
   title: 'Solidity Testing Handbook',
   description: 'A comprehensive guide to testing Solidity smart contracts, covering testing strategies and best practices.',
   iconUrl: './favicon.png',
-  ogImageUrl: './og.jpg',
+  ogImageUrl: {
+    '/': "https://solidity-testing-handbook.vercel.app/og.jpg"
+  },
   sidebar: [
     { text: 'Introduction', link: '/' },
     {
