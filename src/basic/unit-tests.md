@@ -167,4 +167,63 @@ function test_deposit() external {
 }
 ```
 
-This approach enables focused testing on the contract in question, allowing for a more efficient and targeted validation of its logic and behavior. For comprehensive testing that involves the entire transaction flow and interaction between multiple contracts, [integration tests](./integration-tests.md) should be implemented. 
+This approach enables focused testing on the contract in question, allowing for a more efficient and targeted validation of its logic and behavior. For comprehensive testing that involves the entire transaction flow and interaction between multiple contracts, [integration tests](./integration-tests.md) should be implemented.
+
+---
+
+## Boundary Testing
+
+Boundary testing focuses on verifying behavior at the exact edges of valid and invalid input ranges. Smart contracts often enforce limits like rate limits, exchange rate caps, allowances and the most critical bugs tend to live right at those thresholds. Testing one unit above and one unit below a boundary gives you high confidence that the check is implemented correctly (using `>` vs `>=`, etc.) with minimal test overhead.
+
+The general pattern is:
+1. Call with `limit + 1` and assert the revert.
+2. Call with exactly `limit` and assert success.
+
+### Example: Rate Limit Boundary
+
+```solidity
+function test_depositERC4626_rateLimitBoundary() external {
+    vm.startPrank(relayer);
+
+    mainnetController.mintUSDS(5_000_000e18);
+
+    vm.expectRevert("RateLimits/rate-limit-exceeded");
+    mainnetController.depositERC4626(address(susds), 5_000_000e18 + 1);
+
+    mainnetController.depositERC4626(address(susds), 5_000_000e18);
+
+    vm.stopPrank();
+}
+```
+
+Here, `5_000_000e18` is the configured rate limit. The test confirms that depositing one wei above the limit reverts, while depositing exactly at the limit succeeds. This catches off-by-one errors in the comparison operator used inside the rate-limit check.
+
+### Example: Exchange Rate Boundary
+
+```solidity
+function test_depositERC4626_exchangeRateBoundary() external {
+    vm.prank(relayer);
+    mainnetController.mintUSDS(5_000_000e18);
+
+    vm.startPrank(Ethereum.SPARK_PROXY);
+    mainnetController.setMaxExchangeRate(address(susds), susds.convertToShares(5_000_000e18), 5_000_000e18 - 1);
+    vm.stopPrank();
+
+    vm.prank(relayer);
+    vm.expectRevert("MC/exchange-rate-too-high");
+    mainnetController.depositERC4626(address(susds), 5_000_000e18);
+
+    vm.startPrank(Ethereum.SPARK_PROXY);
+    mainnetController.setMaxExchangeRate(address(susds), susds.convertToShares(5_000_000e18), 5_000_000e18);
+    vm.stopPrank();
+
+    vm.prank(relayer);
+    mainnetController.depositERC4626(address(susds), 5_000_000e18);
+}
+```
+
+This test sets the max allowed assets to `5_000_000e18 - 1`, then attempts a deposit of `5_000_000e18` which should revert because the exchange rate check fails. It then raises the limit to exactly `5_000_000e18` and confirms the same deposit now succeeds.
+
+Notice how both tests follow the same structure: fail at `boundary + 1` (or with a tighter limit), succeed at the exact boundary. This pattern is reusable across any threshold-based guard in your contracts.
+
+> The above test snippets are taken from [spark-alm-controller `4626Calls.t.sol`](https://github.com/sparkdotfi/spark-alm-controller/blob/3dbc7cb01739e91dad61a75cda8d7c84b4474e0b/test/mainnet-fork/4626Calls.t.sol#L76) as suggested by Lucas from [Spark.fi](https://spark.fi).
