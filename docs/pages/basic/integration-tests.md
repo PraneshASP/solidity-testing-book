@@ -77,7 +77,7 @@ The above test validates that the reward rate in the vault contract has been suc
 
 > 💡 **Random Tip:** 
 > 
-> To test the functions with external call to other contracts, you can follow the [mocking](https://solidity-testing-handbook.vercel.app/basic/unit-tests#mocking) technique discussed in the Unit test chapter.  
+> To test the functions with external call to other contracts, you can follow the [mocking](https://soliditytestingbook.com/basic/unit-tests#mocking) technique discussed in the Unit test chapter.  
 
 ## Key takeaways
 - Integration test should come after unit tests.

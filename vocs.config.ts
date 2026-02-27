@@ -5,7 +5,7 @@ export default defineConfig({
   description: 'A comprehensive guide to testing Solidity smart contracts, covering testing strategies and best practices.',
   iconUrl: './favicon.png',
   ogImageUrl: {
-    '/': "https://solidity-testing-handbook.vercel.app/og.jpg"
+    '/': "https://soliditytestingbook.com/og.jpg"
   },
   sidebar: [
     { text: 'Introduction', link: '/' },
@@ -40,6 +40,22 @@ export default defineConfig({
     { text: 'Symbolic Testing', link: '/symbolic-testing' },
     { text: 'Branching Tree Technique', link: '/branching-tree-technique' },
     { text: 'Swiss Cheese Method', link: '/swiss-cheese' },
+  ],
+
+  editLink: {
+    pattern: 'https://github.com/PraneshASP/solidity-testing-book/edit/main/docs/pages/:path',
+    text: 'Improve this page',
+  },
+
+  socials: [
+    {
+      icon: 'github',
+      link: 'https://github.com/PraneshASP/solidity-testing-book',
+    },
+    {
+      icon: 'x',
+      link: 'https://twitter.com/0xasp_',
+    },
   ],
 
   theme: {
