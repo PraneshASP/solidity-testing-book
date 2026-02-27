@@ -36,4 +36,6 @@ Ok. Now make yourself a cup of tea and come back. Let's start with the [B A S I 
 
 This handbook wouldn't have been possible without the support of the Ethereum Foundation. Their grant program has made this resource freely available to the solidity developers and security researchers. A huge thanks to them for believing in the importance of accessible, quality educational content for Solidity developers.
 
+Special thanks to [engn33r](https://x.com/bl4ckb1rd71), [Daniel VF](https://x.com/danielvf), and [Lucas Manuel](https://x.com/lucasmanuel_eth) for their valuable feedback.
+
 ![Ethereum Foundation Logo](images/eth-foundation.png)

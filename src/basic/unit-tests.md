@@ -169,8 +169,6 @@ function test_deposit() external {
 
 This approach enables focused testing on the contract in question, allowing for a more efficient and targeted validation of its logic and behavior. For comprehensive testing that involves the entire transaction flow and interaction between multiple contracts, [integration tests](./integration-tests.md) should be implemented.
 
----
-
 ## Boundary Testing
 
 Boundary testing focuses on verifying behavior at the exact edges of valid and invalid input ranges. Smart contracts often enforce limits like rate limits, exchange rate caps, allowances and the most critical bugs tend to live right at those thresholds. Testing one unit above and one unit below a boundary gives you high confidence that the check is implemented correctly (using `>` vs `>=`, etc.) with minimal test overhead.
