@@ -1,6 +1,8 @@
+import React from 'react'
 import { defineConfig } from 'vocs'
 
 export default defineConfig({
+  head: React.createElement('script', { src: 'https://va.vercel-scripts.com/v1/script.js', defer: true }),
   title: 'Solidity Testing Handbook',
   description: 'A comprehensive guide to testing Solidity smart contracts, covering testing strategies and best practices.',
   iconUrl: './favicon.png',
