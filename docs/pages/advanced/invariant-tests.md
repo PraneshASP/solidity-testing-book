@@ -269,9 +269,9 @@ contract Handler is Test {
         protocol.deposit(amount);
         vm.stopPrank();
 
-        if (!actorList[msg.sender]) {
-            actorList[msg.sender] = true;
-            actors.push(msg.sender);
+        if (!actors[msg.sender]) {
+            actors[msg.sender] = true;
+            actorList.push(msg.sender);
         }
     }
 
@@ -289,9 +289,9 @@ contract Handler is Test {
         }
         vm.stopPrank();
 
-        if (!actorList[actor]) {
-            actorList[actor] = true;
-            actors.push(actor);
+        if (!actors[actor]) {
+            actors[actor] = true;
+            actorList.push(actor);
         }
     }
 
@@ -306,7 +306,7 @@ contract Handler is Test {
 
         if (!actors[actor]) {
             actors[actor] = true;
-            actors.push(actor);
+            actorList.push(actor);
         }
     }
 
@@ -323,9 +323,9 @@ contract Handler is Test {
         protocol.repay(amount);
         vm.stopPrank();
 
-        if (!actorList[actor]) {
-            actorList[actor] = true;
-            actors.push(actor);
+        if (!actors[actor]) {
+            actors[actor] = true;
+            actorList.push(actor);
         }
     }
 
